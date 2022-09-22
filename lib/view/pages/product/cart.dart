@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:one_iota/provider/products.dart';
+import 'package:one_iota/styles/styles.dart';
 import 'package:one_iota/view/widgets/product/products_grid.dart';
 import 'package:one_iota/view/widgets/product/recently_viewed.dart';
-import 'package:one_iota/view/widgets/shared/submit_button.dart';
+import 'package:one_iota/view/widgets/shared/floating_container.dart';
+import 'package:one_iota/view/widgets/shared/main_scaffold.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
@@ -10,40 +12,44 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('oneiota'),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 24,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ProductsGrid(products: context.read<ProductsProvider>().products),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text(
-                  'Subtotal: ${context.read<ProductsProvider>().countCartSubtotal()}',
-                ),
+    return MainScaffold(
+      title: 'Your Cart',
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all($styles.insets.md),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ProductsGrid(
+                    products: context.read<ProductsProvider>().cart,
+                  ),
+                  if (context
+                      .read<ProductsProvider>()
+                      .recentlyViewed
+                      .isNotEmpty)
+                    Column(
+                      children: [
+                        const Divider(thickness: 1),
+                        RecentlyViewedProducts(
+                          recentlyViewed:
+                              context.read<ProductsProvider>().recentlyViewed,
+                        ),
+                      ],
+                    ),
+                  const SizedBox(height: 70),
+                ],
               ),
-              Center(
-                child: SubmitButton(
-                  onTap: () {},
-                  text: 'Proceed to checkout',
-                ),
-              ),
-              if (context.read<ProductsProvider>().recentlyViewed.isNotEmpty)
-                RecentlyViewedProducts(
-                  recentlyViewed:
-                      context.read<ProductsProvider>().recentlyViewed,
-                ),
-            ],
+            ),
           ),
-        ),
+          FloatingContainer(
+            text:
+                "£${context.read<ProductsProvider>().countCartSubtotal().toString()}",
+            onButtonClick: () {},
+            buttonText: 'Checkout',
+          )
+        ],
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_iota/styles/styles.dart';
 
 class CartIconButton extends StatelessWidget {
   const CartIconButton({
@@ -12,37 +13,54 @@ class CartIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return counter == 0
-        ? const IconButton(
-            onPressed: null,
-            icon: Icon(Icons.shopping_cart_outlined),
-          )
-        : Stack(
-            children: [
-              IconButton(
-                onPressed: () => onTap(),
-                icon: const Icon(
-                  Icons.add_shopping_cart,
+    if (counter == 0) {
+      return IconButton(
+        onPressed: null,
+        icon: Icon(
+          Icons.shopping_cart_outlined,
+          color: $styles.colors.white,
+          size: 30,
+        ),
+      );
+    }
+
+    final String counterText = counter > 9 ? "9+" : counter.toString();
+    return Stack(
+      children: [
+        Center(
+          child: IconButton(
+            onPressed: () => onTap(),
+            icon: Icon(
+              Icons.add_shopping_cart,
+              color: $styles.colors.white,
+              size: 30,
+            ),
+          ),
+        ),
+        Positioned(
+          right: 14,
+          top: 8,
+          child: Container(
+            height: 19,
+            width: 19,
+            decoration: BoxDecoration(
+              color: $styles.colors.accent1,
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Text(
+                counterText,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: $styles.colors.greyStrong,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
                 ),
               ),
-              Positioned(
-                right: 16,
-                child: Container(
-                  padding: const EdgeInsets.all(3),
-                  decoration: const BoxDecoration(
-                    color: Colors.redAccent,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Text(
-                    counter.toString(),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          );
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

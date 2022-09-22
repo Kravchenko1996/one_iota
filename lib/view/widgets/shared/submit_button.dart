@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_iota/styles/styles.dart';
 
 class SubmitButton extends StatelessWidget {
   const SubmitButton({
@@ -15,12 +16,16 @@ class SubmitButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap != null ? () => onTap!() : null,
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(MediaQuery.of(context).size.width - 32, 56),
+        primary: $styles.colors.greyStrong,
+        onPrimary: $styles.colors.accent1,
+        textStyle: $styles.text.button,
+        padding: EdgeInsets.all($styles.insets.lg),
+        minimumSize: Size(MediaQuery.of(context).size.width - 150, 56),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      child: Text(text),
+      child: Text(text.toUpperCase()),
     );
   }
 }

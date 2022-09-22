@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_iota/styles/styles.dart';
 
 import '../../../model/product.dart';
 import 'products_grid.dart';
@@ -16,9 +17,9 @@ class RecentlyViewedProducts extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 8),
-          child: Text('Recently Viewed'),
+        Padding(
+          padding: EdgeInsets.all($styles.insets.md),
+          child: const Text('Recently Viewed'),
         ),
         ProductsGrid(products: recentlyViewed),
       ],

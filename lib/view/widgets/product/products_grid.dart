@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_iota/model/product.dart';
+import 'package:one_iota/styles/styles.dart';
 import 'package:one_iota/view/widgets/product/product_item.dart';
 
 class ProductsGrid extends StatelessWidget {
@@ -22,10 +23,23 @@ class ProductsGrid extends StatelessWidget {
       itemCount: products.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: (_isPortrait(context)) ? 2 : 3,
+        childAspectRatio: 2 / 3.2,
       ),
       itemBuilder: (_, int index) {
-        return ProductItem(
-          product: products[index],
+        int subtractor = products.length % 2 == 0 ? 2 : 1;
+        double bottomPadding = index >= products.length - subtractor
+            ? $styles.insets.xl
+            : $styles.insets.sm;
+        return Padding(
+          padding: EdgeInsets.only(
+            left: $styles.insets.sm,
+            top: $styles.insets.sm,
+            right: $styles.insets.sm,
+            bottom: bottomPadding,
+          ),
+          child: ProductItem(
+            product: products[index],
+          ),
         );
       },
     );
