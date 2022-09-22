@@ -17,7 +17,7 @@ class SubmitButton extends StatelessWidget {
       onPressed: onTap != null ? () => onTap!() : null,
       style: ElevatedButton.styleFrom(
         primary: $styles.colors.greyStrong,
-        onPrimary: $styles.colors.accent1,
+        onPrimary: $styles.colors.accent,
         textStyle: $styles.text.button,
         padding: EdgeInsets.all($styles.insets.lg),
         minimumSize: Size(MediaQuery.of(context).size.width - 150, 56),

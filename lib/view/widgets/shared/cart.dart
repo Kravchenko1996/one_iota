@@ -44,7 +44,7 @@ class CartIconButton extends StatelessWidget {
             height: 19,
             width: 19,
             decoration: BoxDecoration(
-              color: $styles.colors.accent1,
+              color: $styles.colors.accent,
               shape: BoxShape.circle,
             ),
             child: Center(

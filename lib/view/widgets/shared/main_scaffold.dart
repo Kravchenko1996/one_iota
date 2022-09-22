@@ -27,7 +27,7 @@ class MainScaffold extends StatelessWidget {
           style: $styles.text.title.copyWith(
             fontSize: 24,
             fontWeight: FontWeight.w700,
-            color: $styles.colors.accent1,
+            color: $styles.colors.accent,
           ),
         ),
         foregroundColor: $styles.colors.white,

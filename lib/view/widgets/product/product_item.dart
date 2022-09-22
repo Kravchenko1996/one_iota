@@ -74,7 +74,7 @@ class ProductItem extends StatelessWidget {
                       Text(
                         '${product.price.amount} ${product.price.currency}',
                         style: $styles.text.price.copyWith(
-                          color: $styles.colors.accent1,
+                          color: $styles.colors.accent,
                         ),
                       ),
                     ],
